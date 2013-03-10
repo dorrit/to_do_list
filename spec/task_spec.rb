@@ -36,6 +36,13 @@ describe Task do
 		it {should belong_to :list}
 	end
 
+  context '.not_done' do
+  	it 'returns only not done tasks' do
+  		not_done_tasks = (1..5).to_a.map {|number| Task.create(:name => "task #{number}", :done=> false )}
+  		done_task = Task.create(:name => "done task", :done => true)
+  		Task.not_done.should eq not_done_tasks
+  	end
+  end
 
 
 			

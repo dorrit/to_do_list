@@ -1,5 +1,6 @@
 require 'active_record'
 require './lib/task'
+require './lib/list'
 
 database_configurations = YAML::load(File.open('./db/config.yml'))
 development_configuration = database_configurations["development"]
@@ -46,8 +47,7 @@ end
 
 def list
   puts "Here is everything you need to do:"
-  tasks = Task.all
-  tasks.each {|task| puts task.name}
+  Task.not_done.each {|task| puts task.name}
 end
 
 def mark_done
